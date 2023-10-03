@@ -1,0 +1,51 @@
+# Dependency directories
+/node_modules
+
+# Logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Environment configuration
+.env
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# Output of 'npm pack'
+*.tgz
+
+# yarn.lock file
+yarn.lock
+
+# dotenv environment variable files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Mac OS files
+.DS_Store
+
+# Editor specific files
+.vscode/
+.idea/
+
+# IDE project files
+*.iml
+
+# Node.js generated files
+node_modules/
+npm-debug.log*
+
+# JSHint
+.jshintrc
+
+# ESLint
+.eslintcache
+.eslintignore
