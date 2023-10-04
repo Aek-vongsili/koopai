@@ -2,12 +2,14 @@ const db = require("../models");
 const bcrypt = require("bcryptjs");
 const User = db.users;
 const jwt = require("jsonwebtoken");
+const { privateKey } = require("../key/key");
+const logger = require("../logger");
 const register = async (req, res) => {
   const { phoneNumber, password } = req.body;
   const alreadyExistsUser = await User.findOne({
     where: { phoneNumber },
   }).catch((err) => {
-    console.log("Error: ", err);
+    logger.error(`An error occurred: ${err.message}`);
   });
 
   if (alreadyExistsUser) {
@@ -32,7 +34,7 @@ const login = async (req, res) => {
   const userWithPhoneNumber = await User.findOne({
     where: { phoneNumber },
   }).catch((err) => {
-    console.log("Error: ", err);
+    logger.error(`An error occurred: ${err.message}`);
   });
 
   if (!userWithPhoneNumber)
@@ -54,7 +56,11 @@ const login = async (req, res) => {
       phoneNumber: userWithPhoneNumber.phoneNumber,
     },
 
-    "This is a key"
+    privateKey,
+    {
+      expiresIn: "24h",
+      algorithm: "RS256",
+    }
   );
 
   res.json({ message: "Welcome Back!", token: jwtToken });

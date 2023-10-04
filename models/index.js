@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const dbConfig = require("../config/dbConfig.js");
-
+const logger = require("../logger.js");
 const sequelize = new Sequelize(
   process.env.DB_DATABASE,
   process.env.DB_USER,
@@ -25,7 +25,7 @@ sequelize
     console.log("Database Connected");
   })
   .catch((err) => {
-    console.log("Error" + err);
+    logger.error(`An error occurred: ${err.message}`);
   });
 
 const db = {};
